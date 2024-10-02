@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rKwwuHF1QqARHjkbGkcmZK4cGEgbZZuASiArNKLKu5E=",
+  "Hash": "iQGHR24JFw23OlhVOby5Av6MG4ihT59iRvOu2Z+p1d4=",
   "Source": "MusicManager",
   "BasePath": "_content/MusicManager",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\images\\ipseite.jpg",
+      "SourceId": "MusicManager",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\",
+      "BasePath": "_content/MusicManager",
+      "RelativePath": "images/ipseite.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\ipseite.jpg"
     },
     {
       "Identity": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\images\\lineVertical.png",

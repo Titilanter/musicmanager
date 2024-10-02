@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\images\\ipseite.jpg",
+      "PackagePath": "staticwebassets\\images\\ipseite.jpg"
+    },
+    {
       "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\images\\lineVertical.png",
       "PackagePath": "staticwebassets\\images\\lineVertical.png"
     },
