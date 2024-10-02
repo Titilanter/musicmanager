@@ -32,7 +32,6 @@ C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.MusicManager.props
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
-C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\scopedcss\bundle\MusicManager.styles.css
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\scopedcss\projectbundle\MusicManager.bundle.scp.css
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\MusicMan.D3AF0245.Up2Date
@@ -41,3 +40,4 @@ C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\MusicManager.pdb
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\MusicManager.genruntimeconfig.cache
 C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\ref\MusicManager.dll
+C:\Users\elanternier\Documents\Tests C#\MusicManager\MusicManager\obj\Debug\net8.0\MusicManager.sourcelink.json

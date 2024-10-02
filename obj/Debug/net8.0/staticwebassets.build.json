@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dQOCq5IoX4Q+lBnuV+CSIDlVNYPS6BtpxHvxpKqfYGI=",
+  "Hash": "rKwwuHF1QqARHjkbGkcmZK4cGEgbZZuASiArNKLKu5E=",
   "Source": "MusicManager",
   "BasePath": "_content/MusicManager",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\images\\lineVertical.png",
+      "SourceId": "MusicManager",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\",
+      "BasePath": "_content/MusicManager",
+      "RelativePath": "images/lineVertical.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\lineVertical.png"
     }
   ]
 }

@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\images\\lineVertical.png",
+      "PackagePath": "staticwebassets\\images\\lineVertical.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MusicManager.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
