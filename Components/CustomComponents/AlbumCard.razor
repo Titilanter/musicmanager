@@ -1,23 +1,25 @@
-<MudCard Outlined="true" Style="width: 250px; border-radius: 16px;">
-    
-    <MudCardMedia Image="images/ipseite.jpg" Height="180" />
-    <MudCardContent Class="d-flex justify-center flex-column">
-        <MudText Typo="Typo.h6" Align="Align.Center">Ipseite</MudText>
-        <MudText Typo="Typo.body2" Style="font-style: italic;" Align="Align.Center">12/12/12</MudText>
-    </MudCardContent>
-    <MudCardActions Class="justify-center">
-        <MudToggleIconButton @bind-Toggled="albumDone"
-                     Icon="@Icons.Material.Filled.Construction"
-                     Color="@Color.Warning"
-                     ToggledIcon="@Icons.Material.Filled.CheckCircle"
-                     ToggledColor="@Color.Success"
-                     title="@(albumDone ? "On" : "Off")" />
+<MudLink Href="/album/Ipseite"  Class="text-decoration-none">
+    <MudCard Outlined="true" Style="width:250px; border-radius: 16px;">
+        
+        <MudCardMedia Image="images/ipseite.jpg" Height="180" />
+        <MudCardContent Class="d-flex justify-center flex-column">
+            <MudText Typo="Typo.h6" Align="Align.Center">Ipseite</MudText>
+            <MudText Typo="Typo.body2" Style="font-style: italic;" Align="Align.Center">12/12/12</MudText>
+        </MudCardContent>
+        <MudCardActions Class="justify-center">
+            <MudToggleIconButton @bind-Toggled="albumDone"
+                        Icon="@Icons.Material.Filled.Construction"
+                        Color="@Color.Warning"
+                        ToggledIcon="@Icons.Material.Filled.CheckCircle"
+                        ToggledColor="@Color.Success"
+                        title="@(albumDone ? "On" : "Off")" />
 
-        <span>L'album est @(albumDone ? "fini" : "en cours de modification")</span>
+            <span>L'album est @(albumDone ? "fini" : "en cours de modification")</span>
 
-        <MudSpacer/>
-    </MudCardActions>
-</MudCard>
+            <MudSpacer/>
+        </MudCardActions>
+    </MudCard>
+</MudLink>
 
 
 @code{

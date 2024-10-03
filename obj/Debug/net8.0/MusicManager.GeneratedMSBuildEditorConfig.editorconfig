@@ -37,6 +37,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDdXN0b21Db21wb25lbnRzXENsaXBDYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/elanternier/Documents/Tests C\#/MusicManager/MusicManager/Components/CustomComponents/MusicComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDdXN0b21Db21wb25lbnRzXE11c2ljQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/elanternier/Documents/Tests C\#/MusicManager/MusicManager/Components/CustomComponents/MusicList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDdXN0b21Db21wb25lbnRzXE11c2ljTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/elanternier/Documents/Tests C\#/MusicManager/MusicManager/Components/Pages/Album.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBbGJ1bS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/elanternier/Documents/Tests C\#/MusicManager/MusicManager/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

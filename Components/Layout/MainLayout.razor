@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="true" />
 <MudPopoverProvider />
@@ -7,9 +8,12 @@
 
 <MudLayout>
     <MudAppBar Elevation="1">
-        <MudIcon Icon="@Icons.Material.Rounded.LogoDev"/>
+        @if(NavigationManager.Uri.ToString().Contains("album") || NavigationManager.Uri.ToString().Contains("clip")){
+            <MudIconButton Icon="@Icons.Material.Rounded.ArrowCircleLeft" Href="/"></MudIconButton>
+        }
+        <MudIcon Icon="@Icons.Material.Rounded.LogoDev" Class="ml-4"/>
         <MudSpacer/>
-        <MudText Typo="Typo.h4">Bienvenue @username</MudText>
+        <MudText Typo="Typo.h4">@PageTitle</MudText>
         <MudSpacer/>
         <MudIconButton Icon="@Icons.Material.Rounded.MusicNote" Variant="Variant.Outlined"/>
 
@@ -27,7 +31,7 @@
 @code{
 
     private MudTheme? _theme = null;
-    private string username {get; set;}
+    private string PageTitle {get; set;}
 
     protected override void OnInitialized(){
         base.OnInitialized();
@@ -37,7 +41,40 @@
             LayoutProperties = new LayoutProperties()
         };
 
-        username = "Tifred";
+        SetPageTitleFromUrl();
+
+        // Subscribe to location changes
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+
+
+     private void SetPageTitleFromUrl()
+    {
+        var uri = NavigationManager.Uri;
+        var urlSegments = new Uri(uri).AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        
+        // Suppose que ton paramètre est le deuxième segment de l'URL par exemple
+        if (urlSegments.Length > 1)
+        {
+            PageTitle = urlSegments[1];  // Extrait le nom de l'album ou autre paramètre d'URL
+        }
+        else{
+            PageTitle = "Bienvenue Tifred";
+        }
+    }
+
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        // Triggered every time the URL changes
+        SetPageTitleFromUrl();
+        StateHasChanged();  // Force the UI to refresh if necessary
+    }
+
+     // Unsubscribe from the event to prevent memory leaks
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
     }
 
 
