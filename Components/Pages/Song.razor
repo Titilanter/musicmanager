@@ -1,0 +1,9 @@
+@page "/song/{songName}"
+
+<PageTitle>@songName</PageTitle>
+
+
+@code{
+    [Parameter]
+    public string songName {get; set;} = "Ipseite";
+}

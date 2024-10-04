@@ -1,0 +1,9 @@
+<MudPaper Width="@Width" Class="d-flex align-self-center" Style="background-color:inherit;" Elevation="0">
+    <MudIconButton Icon="@Icons.Material.Rounded.PlayArrow" Class="align-self-center"/>
+    <MudSlider T="int" Class="align-self-center" Style="width:90%;"/>
+</MudPaper>
+
+@code{
+    [Parameter]
+    public string Width {get; set;} = "50%";
+}
