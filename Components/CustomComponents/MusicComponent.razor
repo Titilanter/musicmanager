@@ -1,4 +1,4 @@
-<MudPaper Width="95%" Height="150px" Class="d-flex ml-4 pl-4" Outlined="true">
+<MudPaper Width="95%" Height="150px" Class="d-flex ml-4 pl-4" Outlined="true" @onclick="GoToMusic">
     <MudText Class="align-self-center mr-4">1.</MudText>
     <MudImage Src="images/ipseite.jpg" Style="heigth:60px; width:60px;" Class="m-2"/>
     <MudText Class="align-self-center ml-4 mr-4" Style="Width:15%;">Mosaïque Solitaire</MudText>
@@ -6,6 +6,21 @@
     <MudText Class="align-self-center mr-10">3:12</MudText>
     <MudText Class="align-self-center ml-4">Feat. Tifred</MudText>
     <MudSpacer/>
-    <MudButton Style="width:150px; height:50px;" Variant="Variant.Filled" Class="align-self-center mr-4">Clip</MudButton>
-    <MudIconButton Icon="@Icons.Material.Rounded.Menu" Class="mr-4"/>
+    <MudButton Style="width:150px; height:50px;" Variant="Variant.Filled" Class="align-self-center mr-4" @onclick="GoToClip">Clip</MudButton>
+    <MudIconButton Icon="@Icons.Material.Rounded.Menu" Class="mr-4" @onclick="DragAndDrop"/>
 </MudPaper>
+
+
+@code{
+    private void GoToMusic(){
+        Console.WriteLine("Paper");
+    }
+
+    private void GoToClip(){
+        Console.WriteLine("Clip");
+    }
+
+    private void DragAndDrop(){
+        Console.WriteLine("DragAndDrop");
+    }
+}

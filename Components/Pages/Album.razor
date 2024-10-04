@@ -9,7 +9,7 @@
         <MudDatePicker Label="Release Date" Editable="true" Placeholder="Select Release Date" Style="width:300px;" Class="align-self-center mb-4" Variant="Variant.Outlined"/>
     </div>
     <MudSpacer/>
-    <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" Variant="Variant.Outlined"/>
+    <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" Variant="Variant.Outlined" @onclick="AddNewSong"/>
     
 </MudPaper>
 
@@ -20,17 +20,25 @@
 
     <MudPaper Width="95%" Height="150px" Class="d-flex ml-4 pl-4" Outlined="true">
         <MudSpacer/>
-        <MudIconButton Icon="@Icons.Material.Rounded.AddCircle"/>
+        <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" @onclick="AddNewSong"/>
         <MudSpacer/>
     </MudPaper>
 
 </MudPaper>
 <MudPaper Height="10vh" Style="background-color:inherit;" Class="d-flex justify-center" Elevation="0">
-    <MudButton Style="width:250px; height:60px;" Variant="Variant.Filled" Class="align-self-center" Color="Color.Success">Plan commercial</MudButton>
+    <MudButton Style="width:250px; height:60px;" Variant="Variant.Filled" Class="align-self-center" Color="Color.Success" @onclick="GoToCommercial">Plan commercial</MudButton>
 </MudPaper>
 
 
 @code{
     [Parameter]
     public string albumName {get; set;} = "Ipseite";
+
+    private void AddNewSong(){
+        Console.WriteLine("AddNewSong");
+    }
+
+    private void GoToCommercial(){
+        Console.WriteLine("GoToCommercial");
+    }
 }
