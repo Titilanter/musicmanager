@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rEQHWhhX5Jw=",
+  "dgSpecHash": "okIgxgaa4NQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\MusicManager.csproj",
   "expectedPackageFiles": [
@@ -17,9 +17,27 @@
     "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.1\\microsoft.extensions.logging.abstractions.8.0.1.nupkg.sha512",
     "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
     "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.5.1\\microsoft.identitymodel.abstractions.7.5.1.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.5.1\\microsoft.identitymodel.jsonwebtokens.7.5.1.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.identitymodel.logging\\7.5.1\\microsoft.identitymodel.logging.7.5.1.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.5.1\\microsoft.identitymodel.tokens.7.5.1.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.0\\microsoft.io.recyclablememorystream.3.0.0.nupkg.sha512",
     "C:\\Users\\elanternier\\.nuget\\packages\\microsoft.jsinterop\\8.0.8\\microsoft.jsinterop.8.0.8.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\mimemapping\\3.0.1\\mimemapping.3.0.1.nupkg.sha512",
     "C:\\Users\\elanternier\\.nuget\\packages\\mudblazor\\7.8.0\\mudblazor.7.8.0.nupkg.sha512",
-    "C:\\Users\\elanternier\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512"
+    "C:\\Users\\elanternier\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\supabase\\1.1.1\\supabase.1.1.1.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\supabase.core\\1.0.0\\supabase.core.1.0.0.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\supabase.functions\\2.0.0\\supabase.functions.2.0.0.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\supabase.gotrue\\6.0.3\\supabase.gotrue.6.0.3.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\supabase.postgrest\\4.0.3\\supabase.postgrest.4.0.3.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\supabase.realtime\\7.0.2\\supabase.realtime.7.0.2.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\supabase.storage\\2.0.2\\supabase.storage.2.0.2.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.5.1\\system.identitymodel.tokens.jwt.7.5.1.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\system.threading.channels\\8.0.0\\system.threading.channels.8.0.0.nupkg.sha512",
+    "C:\\Users\\elanternier\\.nuget\\packages\\websocket.client\\5.1.1\\websocket.client.5.1.1.nupkg.sha512"
   ],
   "logs": []
 }

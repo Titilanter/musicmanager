@@ -49,6 +49,10 @@
             "MudBlazor": {
               "target": "Package",
               "version": "[7.8.0, )"
+            },
+            "supabase": {
+              "target": "Package",
+              "version": "[1.1.1, )"
             }
           },
           "imports": [
