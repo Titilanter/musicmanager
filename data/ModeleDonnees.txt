@@ -1,0 +1,43 @@
+CREATE TABLE Album (
+    idAlbum BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    nom text NOT NULL,
+    artiste text NOT NULL,
+    releaseDate DATE,
+    deadline DATE,
+    fini BOOLEAN,
+    coverUri text
+);
+
+CREATE TABLE Song (
+    idSong BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    idAlbum BIGINT,
+    nom text NOT NULL,
+    releaseDate DATE,
+    deadline DATE,
+    fini BOOLEAN,
+    featurings text,
+    BeatUri text,
+    MockupUri text,
+    Notes TEXT,
+    Paroles TEXT,
+    FOREIGN KEY (idAlbum) REFERENCES Album(idAlbum) ON DELETE CASCADE
+);
+
+CREATE TABLE PlanCommercial (
+    idPlanCom BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    idAlbum BIGINT,
+    idSong BIGINT,
+    isAlbum BOOLEAN,
+    FOREIGN KEY (idAlbum) REFERENCES Album(idAlbum) ON DELETE CASCADE,
+    FOREIGN KEY (idSong) REFERENCES Song(idSong) ON DELETE CASCADE
+);
+
+CREATE TABLE Clip (
+    idClip BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    idSong BIGINT,
+    releaseDate DATE,
+    deadline DATE,
+    fini BOOLEAN,
+    scenario TEXT,
+    FOREIGN KEY (idSong) REFERENCES Song(idSong) ON DELETE CASCADE
+);

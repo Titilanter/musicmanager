@@ -9,7 +9,10 @@
 <MudLayout>
     <MudAppBar Elevation="1">
         @if(NavigationManager.Uri.ToString().Contains("album") || NavigationManager.Uri.ToString().Contains("clip")){
-            <MudIconButton Icon="@Icons.Material.Rounded.ArrowCircleLeft" Href="/"></MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Rounded.ArrowCircleLeft" Href="/"/>
+        }
+        else if(NavigationManager.Uri.ToString().Contains("song")){
+            <MudIconButton Icon="@Icons.Material.Rounded.ArrowCircleLeft" Href="/"/>
         }
         <MudIcon Icon="@Icons.Material.Rounded.LogoDev" Class="ml-4"/>
         <MudSpacer/>

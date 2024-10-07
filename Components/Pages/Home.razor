@@ -4,17 +4,33 @@
 
 <MudPaper Width="100%" Height="90vh" Class="d-flex flex-row gap-4 justify-center" Elevation="0" Style="background-color:inherit;">
     <MudPaper Width="48%" Height="80vh" Class="d-flex align-self-center flex-column p-4" Style="background-color:inherit;">
-        <MudText Typo="Typo.h6" Class="mb-10">Vos albums et singles :</MudText>
-            <MusicManager.Components.CustomComponents.AlbumGrid typeGrid="albums"/>
+        <MudPaper Class="d-flex flex-row align-center mb-10" Style="background-color: inherit;" Elevation="0">
+            <MudText Typo="Typo.h6" Class="align-self-center">Vos albums et singles :</MudText>
+            <MudSpacer/>
+            <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" @onclick="CreateAlbum" Class="align-self-center"/>
+        </MudPaper>
+        <MusicManager.Components.CustomComponents.AlbumGrid typeGrid="albums"/>
     </MudPaper>
 
     <MudImage Src="images/lineVertical.png" ObjectFit="ObjectFit.Contain" Class="align-self-center" Style="height:80%;"/>
 
     <MudPaper Width="48%" Height="80vh" Class="d-flex align-self-center flex-column p-4" Style="background-color:inherit;">
-        <MudText Typo="Typo.h6" Class="mb-10">Vos clips :</MudText>
+        <MudPaper Class="d-flex flex-row align-center mb-10" Style="background-color: inherit;" Elevation="0">
+            <MudText Typo="Typo.h6" Class="align-self-center">Vos clips :</MudText>
+            <MudSpacer/>
+            <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" @onclick="CreateClip" Class="align-self-center"/>
+        </MudPaper>
         <MusicManager.Components.CustomComponents.AlbumGrid typeGrid="clips"/>
     </MudPaper>
 
 </MudPaper>
 
+@code{
+    private void CreateAlbum(){
+        Console.WriteLine("CreateAlbum");
+    }
 
+    private void CreateClip(){
+        Console.WriteLine("CreateClip");
+    }
+}

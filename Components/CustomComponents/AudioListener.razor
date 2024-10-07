@@ -1,6 +1,8 @@
-<MudPaper Width="@Width" Class="d-flex align-self-center" Style="background-color:inherit;" Elevation="0" @onclick="AudioListenerBtn" @onclick:stopPropagation="true">
-    <MudIconButton Icon="@Icons.Material.Rounded.PlayArrow" Class="align-self-center"/>
-    <MudSlider T="int" Class="align-self-center" Style="width:90%;"/>
+<MudPaper Width="@Width" Class="d-flex align-self-center" Style="background-color:inherit;" Elevation="0" @onclick:stopPropagation="true">
+    <MudPaper Width="100%" Class="d-flex align-self-center" Style="background-color:inherit;" Elevation="0" @onclick="AudioListenerBtn">
+        <MudIconButton Icon="@Icons.Material.Rounded.PlayArrow" Class="align-self-center"/>
+        <MudSlider T="int" Class="align-self-center" Style="width:90%;"/>
+    </MudPaper>
 </MudPaper>
 
 @code{

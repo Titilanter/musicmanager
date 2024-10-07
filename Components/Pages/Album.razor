@@ -7,6 +7,16 @@
     <div Class="d-flex gap-4">
         <MudDatePicker Label="Deadline" Editable="true" Placeholder="Select Deadline" Style="width:300px;" Class="align-self-center mb-4 ml-4" Variant="Variant.Outlined"/>
         <MudDatePicker Label="Release Date" Editable="true" Placeholder="Select Release Date" Style="width:300px;" Class="align-self-center mb-4" Variant="Variant.Outlined"/>
+        <MudPaper Class="d-flex align-center p-3 gap-3" Style="background-color:inherit;" Elevation="0">
+            <MudToggleIconButton @bind-Toggled="AlbumFinished"
+                            Icon="@Icons.Material.Rounded.Construction"
+                            Color="@Color.Warning"
+                            ToggledIcon="@Icons.Material.Rounded.Check"
+                            ToggledColor="@Color.Success"
+                            title="@(AlbumFinished ? "Yes" : "No")" />
+
+            <span>L'album est @(AlbumFinished ? "fini" : "en cours de modifications")</span>
+        </MudPaper>
     </div>
     <MudSpacer/>
     <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" Variant="Variant.Outlined" @onclick="AddNewSong"/>
@@ -33,6 +43,8 @@
 @code{
     [Parameter]
     public string albumName {get; set;} = "Ipseite";
+
+    private bool AlbumFinished {get; set;}
 
     private void AddNewSong(){
         Console.WriteLine("AddNewSong");
