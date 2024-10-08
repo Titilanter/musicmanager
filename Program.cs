@@ -1,11 +1,26 @@
 using MusicManager.Components;
 using MudBlazor.Services;
+using MusicManager.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
 builder.Services.AddMudServices();
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<DataContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:5279/") });
+// builder.Services.AddScoped<AlbumService>();
+
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -21,7 +36,18 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+
+
 app.UseHttpsRedirection();
+
+app.UseAuthorization();
+app.MapControllers();
 
 app.UseStaticFiles();
 app.UseAntiforgery();

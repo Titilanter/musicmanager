@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Components",
-    "\\Components\\CustomComponents"
+    "\\Components\\CustomComponents",
+    "\\data"
   ],
-  "SelectedNode": "\\appsettings.json",
+  "SelectedNode": "\\data\\ModeleDonnees.txt",
   "PreviewInSolutionExplorer": false
 }
