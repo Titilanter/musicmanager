@@ -162,3 +162,4 @@ C:\Users\elanternier\Documents\Tests C#\MusicManager\musicmanager\obj\Debug\net8
 C:\Users\elanternier\Documents\Tests C#\MusicManager\musicmanager\obj\Debug\net8.0\MusicManager.pdb
 C:\Users\elanternier\Documents\Tests C#\MusicManager\musicmanager\obj\Debug\net8.0\MusicManager.genruntimeconfig.cache
 C:\Users\elanternier\Documents\Tests C#\MusicManager\musicmanager\obj\Debug\net8.0\ref\MusicManager.dll
+C:\Users\elanternier\Documents\Tests C#\MusicManager\musicmanager\bin\Debug\net8.0\Npgsql.dll

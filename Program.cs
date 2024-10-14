@@ -1,7 +1,6 @@
 using MusicManager.Components;
 using MudBlazor.Services;
 using MusicManager.Data;
-using Microsoft.EntityFrameworkCore;
 
 
 
@@ -13,13 +12,11 @@ builder.Services.AddMudServices();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:5279/") });
-// builder.Services.AddScoped<AlbumService>();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+builder.Services.AddScoped<IDatabaseService>(sp =>
+    new DatabaseService(connectionString));
 
 
 // Add services to the container.
