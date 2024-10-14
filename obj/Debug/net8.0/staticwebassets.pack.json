@@ -1,31 +1,31 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MusicManager.bundle.scp.css",
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\musicmanager\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MusicManager.bundle.scp.css",
       "PackagePath": "staticwebassets\\MusicManager.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\app.css",
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\musicmanager\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\musicmanager\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\musicmanager\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\musicmanager\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\images\\ipseite.jpg",
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\musicmanager\\wwwroot\\images\\ipseite.jpg",
       "PackagePath": "staticwebassets\\images\\ipseite.jpg"
     },
     {
-      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\MusicManager\\wwwroot\\images\\lineVertical.png",
+      "Id": "C:\\Users\\elanternier\\Documents\\Tests C#\\MusicManager\\musicmanager\\wwwroot\\images\\lineVertical.png",
       "PackagePath": "staticwebassets\\images\\lineVertical.png"
     },
     {
