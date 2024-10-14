@@ -1,0 +1,55 @@
+CREATE TABLE Album (
+    idAlbum BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    nom text NOT NULL,
+    artiste text NOT NULL,
+    releaseDate DATE,
+    deadline DATE,
+    fini BOOLEAN,
+    coverUri text
+);
+
+CREATE TABLE Song (
+    idSong BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    idAlbum BIGINT,
+    nom text NOT NULL,
+    releaseDate DATE,
+    deadline DATE,
+    fini BOOLEAN,
+    featurings text,
+    BeatUri text,
+    MockupUri text,
+    Notes TEXT,
+    Paroles TEXT,
+    FOREIGN KEY (idAlbum) REFERENCES Album(idAlbum) ON DELETE CASCADE
+);
+
+CREATE TABLE PlanCommercial (
+    idPlanCom BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    idAlbum BIGINT,
+    idSong BIGINT,
+    isAlbum BOOLEAN,
+    FOREIGN KEY (idAlbum) REFERENCES Album(idAlbum) ON DELETE CASCADE,
+    FOREIGN KEY (idSong) REFERENCES Song(idSong) ON DELETE CASCADE
+);
+
+CREATE TABLE Clip (
+    idClip BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    idSong BIGINT,
+    releaseDate DATE,
+    deadline DATE,
+    fini BOOLEAN,
+    scenario TEXT,
+    FOREIGN KEY (idSong) REFERENCES Song(idSong) ON DELETE CASCADE
+);
+
+MDP : SOFZYcNxsC38DKB6
+
+
+
+
+INSERT INTO Album (nom, artiste, releaseDate, deadline, fini, coverUri)
+VALUES ('Ipseite', 'Tifred', '2024-10-01', '2024-12-31', false, 'https://th.bing.com/th/id/OIP.3_gV44O5DcYBVZm9Cd4P4gHaD_?rs=1&pid=ImgDetMain');
+
+INSERT INTO Song (idAlbum, nom, releaseDate, deadline, fini, featurings, BeatUri, MockupUri, Notes, Paroles)
+VALUES (1, 'Mosaique Solitaire', '2024-11-01', '2024-12-15', false, 'Tifred', '', '', 'Ceci est une note.', 'Voici les paroles de la chanson.');
+

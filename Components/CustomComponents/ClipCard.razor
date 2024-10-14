@@ -1,0 +1,25 @@
+<MudCard Outlined="true" Style="width: 250px; border-radius: 16px;">
+    
+    <MudCardMedia Image="images/ipseite.jpg" Height="180" />
+    <MudCardContent Class="d-flex justify-center flex-column">
+        <MudText Typo="Typo.h6" Align="Align.Center">Macarena</MudText>
+        <MudText Typo="Typo.body2" Style="font-style: italic;" Align="Align.Center">28/12/12</MudText>
+    </MudCardContent>
+    <MudCardActions Class="justify-center">
+        <MudToggleIconButton @bind-Toggled="clipDone"
+                     Icon="@Icons.Material.Filled.Construction"
+                     Color="@Color.Warning"
+                     ToggledIcon="@Icons.Material.Filled.CheckCircle"
+                     ToggledColor="@Color.Success"
+                     title="@(clipDone ? "On" : "Off")" />
+
+        <span>Le clip est @(clipDone ? "fini" : "en cours de modification")</span>
+
+        <MudSpacer/>
+    </MudCardActions>
+</MudCard>
+
+
+@code{
+    public bool clipDone { get; set; }
+}

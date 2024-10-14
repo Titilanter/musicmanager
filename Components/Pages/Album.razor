@@ -1,0 +1,56 @@
+@page "/album/{albumName}"
+
+<PageTitle>@albumName</PageTitle>
+
+@* Ajouter targetRelease Date et Editing Deadline *@
+<MudPaper Width="95%" Style="background-color:inherit;" Class="d-flex justify-between align-center">
+    <div Class="d-flex gap-4">
+        <MudDatePicker Label="Deadline" Editable="true" Placeholder="Select Deadline" Style="width:300px;" Class="align-self-center mb-4 ml-4" Variant="Variant.Outlined"/>
+        <MudDatePicker Label="Release Date" Editable="true" Placeholder="Select Release Date" Style="width:300px;" Class="align-self-center mb-4" Variant="Variant.Outlined"/>
+        <MudPaper Class="d-flex align-center p-3 gap-3" Style="background-color:inherit;" Elevation="0">
+            <MudToggleIconButton @bind-Toggled="AlbumFinished"
+                            Icon="@Icons.Material.Rounded.Construction"
+                            Color="@Color.Warning"
+                            ToggledIcon="@Icons.Material.Rounded.Check"
+                            ToggledColor="@Color.Success"
+                            title="@(AlbumFinished ? "Yes" : "No")" />
+
+            <span>L'album est @(AlbumFinished ? "fini" : "en cours de modifications")</span>
+        </MudPaper>
+    </div>
+    <MudSpacer/>
+    <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" Variant="Variant.Outlined" @onclick="AddNewSong"/>
+    
+</MudPaper>
+
+<MudPaper Class="d-flex flex-column gap-4" Height="70vh" Style="overflow-y:auto; background-color:inherit;">
+
+    <MusicManager.Components.CustomComponents.MusicList/>
+
+
+    <MudPaper Width="95%" Height="150px" Class="d-flex ml-4 pl-4" Outlined="true">
+        <MudSpacer/>
+        <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" @onclick="AddNewSong"/>
+        <MudSpacer/>
+    </MudPaper>
+
+</MudPaper>
+<MudPaper Height="10vh" Style="background-color:inherit;" Class="d-flex justify-center" Elevation="0">
+    <MudButton Style="width:250px; height:60px;" Variant="Variant.Filled" Class="align-self-center" Color="Color.Success" @onclick="GoToCommercial">Plan commercial</MudButton>
+</MudPaper>
+
+
+@code{
+    [Parameter]
+    public string albumName {get; set;} = "Ipseite";
+
+    private bool AlbumFinished {get; set;}
+
+    private void AddNewSong(){
+        Console.WriteLine("AddNewSong");
+    }
+
+    private void GoToCommercial(){
+        Console.WriteLine("GoToCommercial");
+    }
+}

@@ -1,0 +1,21 @@
+<MudGrid Spacing="10" Justify="Justify.Center" Style="overflow-y:auto;">
+    @for (int i = 0; i < 9; i++)
+    {
+        <MudItem>
+            @if(typeGrid=="albums"){
+                <AlbumCard/>
+            }
+            else{
+                <ClipCard/>
+            }
+        </MudItem>
+    }
+</MudGrid>
+
+
+@code{
+
+    
+    [Parameter]
+    public string typeGrid {get; set;} = string.Empty;
+}

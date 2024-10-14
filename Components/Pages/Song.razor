@@ -1,0 +1,67 @@
+@page "/song/{songName}"
+
+<PageTitle>@songName</PageTitle>
+
+<MudPaper Width="100%" Style="background-color:inherit;" Class="pl-4 pr-4" Elevation="0">
+    <MudPaper Class="d-flex align-center" Style="background-color:inherit;" Elevation="0">
+        <MudPaper Class="d-flex align-center p-3 gap-3" Style="background-color:inherit;" Outlined="true" Elevation="0" @onclick="AddFeaturing">
+            <MudIcon Icon="@Icons.Material.Rounded.AddCircle"/>
+            <MudText>Ajouter un featuring</MudText>
+        </MudPaper>
+        <MudText Class="m-4">Feat. Tifred, Ninho</MudText>
+        <MudPaper Class="d-flex align-center p-3 gap-3" Style="background-color:inherit;" Elevation="0">
+            <MudToggleIconButton @bind-Toggled="SongFinished"
+                            Icon="@Icons.Material.Rounded.Construction"
+                            Color="@Color.Warning"
+                            ToggledIcon="@Icons.Material.Rounded.Check"
+                            ToggledColor="@Color.Success"
+                            title="@(SongFinished ? "Yes" : "No")" />
+
+            <span>Le son est @(SongFinished ? "fini" : "en cours de modifications")</span>
+        </MudPaper>
+        <MudSpacer/>
+        <MudButton Variant="Variant.Filled" Class="p-3" Style="width:200px;" Color="@Color.Dark" @onclick="GoToClip">Clip</MudButton>
+    </MudPaper>
+</MudPaper>
+
+
+<MudPaper Width="100%" Height="80vh" Style="background-color:inherit;" Class="p-3 d-flex" Elevation="0">
+    <MudPaper Width="66vw" Style="background-color:inherit;" Elevation="0">
+        <MudPaper Style="background-color:inherit;" Class="d-flex" Elevation="0">
+            <MudPaper Width="50%" Style="background-color:inherit;" Elevation="0">
+                <MudText Class="ml-4">Maquette :</MudText>
+                <MusicManager.Components.CustomComponents.AudioListener/>
+            </MudPaper>
+            <MudPaper Width="50%" Style="background-color:inherit;" Elevation="0">
+                <MudText Class="ml-4">Instrumentale :</MudText>
+                <MusicManager.Components.CustomComponents.AudioListener/>
+            </MudPaper>
+        </MudPaper>
+
+        <MudPaper Class="pl-2" Style="background-color:inherit; height:72vh; overflow:auto;" Outlined="true">
+            <MudTextField T="string" Label="Notes" Text="@notesContent" Lines="34" AutoGrow/>
+        </MudPaper>
+
+    </MudPaper>
+
+    <MudPaper Width="33vw" Class=" m-2 pl-2" Style="background-color:inherit; height:79vh; overflow:auto;" Outlined="true" >
+        <MudTextField T="string" Label="Paroles" Text="@Paroles" Lines="37" AutoGrow/>
+    </MudPaper>
+</MudPaper>
+
+
+@code{
+    [Parameter]
+    public string songName {get; set;} = "Ipseite";
+    private bool SongFinished {get; set;}
+    private string notesContent {get; set;}
+    private string Paroles {get; set;}
+
+    private void AddFeaturing(){
+        Console.WriteLine("Feat");
+    }
+
+    private void GoToClip(){
+        Console.WriteLine("Clip");
+    }
+}
