@@ -1,5 +1,4 @@
 ﻿using MusicManager.Data.ORM;
-using Microsoft.VisualBasic;
 using Npgsql;
 
 namespace MusicManager.Data;
@@ -36,7 +35,7 @@ public class DatabaseService : IDatabaseService
                 artiste = !reader.IsDBNull(2) ? reader.GetString(2) : null,
                 releaseDate = !reader.IsDBNull(3) ? reader.GetDateTime(3) : null,
                 deadline = !reader.IsDBNull(4) ? reader.GetDateTime(4) : null,
-                fini = !reader.IsDBNull(5) ? reader.GetBoolean(5) : null,
+                fini = reader.GetBoolean(5),
                 coverUri = !reader.IsDBNull(6) ? reader.GetString(6) : null
             };
 

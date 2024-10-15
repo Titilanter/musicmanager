@@ -1,17 +1,51 @@
+@using MusicManager.Data.ORM
 <MudLink Href="/album/Ipseite"  Class="text-decoration-none">
     <MudCard Outlined="true" Style="width:250px; border-radius: 16px;">
         
-        <MudCardMedia Image="images/ipseite.jpg" Height="180" />
+        <MudCardMedia Image="@coverUri" Height="180" />
         <MudCardContent Class="d-flex justify-center flex-column">
-            <MudText Typo="Typo.h6" Align="Align.Center">Ipseite</MudText>
-            <MudText Typo="Typo.body2" Style="font-style: italic;" Align="Align.Center">12/12/12</MudText>
+            <MudText Typo="Typo.h6" Align="Align.Center">@album.nom</MudText>
+            <MudText Typo="Typo.body2" Style="font-style: italic;" Align="Align.Center">@releaseDate</MudText>
         </MudCardContent>
-        <MudCardActions Class="justify-center">
-            <MudIcon Icon="@Icons.Material.Filled.Construction" Color="@Color.Warning" Class="mr-4 ml-2"/>
+        <MudCardActions Class="justify-center" Style="height:60px;">
+            <MudIcon Icon="@iconFini" Color="@iconColor" Class="mr-4 ml-2"/>
 
-            <span>L'album est en cours de modification</span>
+            <span>@textIcon</span>
 
             <MudSpacer/>
         </MudCardActions>
     </MudCard>
 </MudLink>
+
+
+@code{
+    [Parameter]
+    public Album album {get; set;} = new Album();
+
+    private string coverUri {get; set;}
+    private string releaseDate{get; set;} = "release date inconnue";
+    private string iconFini {get; set;} = Icons.Material.Filled.Construction;
+    private MudBlazor.Color iconColor {get; set;} = Color.Warning;
+    private string textIcon {get; set;} = "L'album est en cours de modification";
+
+    protected override void OnInitialized(){
+        if(album.coverUri=="" || album.coverUri==null){
+            coverUri="images/AlbumDefault.png";
+        }
+        else{
+            coverUri=album.coverUri;
+        }
+
+        if(album.releaseDate!=null){
+            releaseDate = album.releaseDate.ToString().Substring(0, 10);
+        }
+
+        if(album.fini){
+            iconFini=Icons.Material.Rounded.Check;
+            textIcon="L'album est fini.";
+            iconColor=Color.Success;
+        }
+
+        StateHasChanged();
+    }
+}  
