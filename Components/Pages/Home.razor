@@ -1,5 +1,7 @@
 ﻿@page "/"
-@* @using MusicManager.Services; *@
+@using MusicManager.Data
+@inject IDatabaseService DatabaseService
+
 
 <PageTitle>MusicManager</PageTitle>
 
@@ -29,15 +31,20 @@
 @code{
 
 
-    private List<Album> albums = new();
+    private IEnumerable<MusicManager.Data.ORM.Album> albums = new List<MusicManager.Data.ORM.Album>();
 
     @* protected override async Task OnInitializedAsync()
     {
         albums = await AlbumService.GetAlbumsAsync();
     } *@
 
-    private void CreateAlbum(){
+    private async Task CreateAlbum(){
         Console.WriteLine("CreateAlbum");
+        albums = await DatabaseService.GetAllAlbumsAsync();
+
+        foreach(MusicManager.Data.ORM.Album album in albums){
+            Console.WriteLine(album);
+        }
     }
 
     private void CreateClip(){
