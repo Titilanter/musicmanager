@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@using MusicManager.Data
 @inject NavigationManager NavigationManager
+@inject IDatabaseService DatabaseService
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="true" />
 <MudPopoverProvider />
@@ -36,15 +38,14 @@
     private MudTheme? _theme = null;
     private string PageTitle {get; set;}
 
-    protected override void OnInitialized(){
-        base.OnInitialized();
+    protected override async Task OnInitializedAsync(){
 
         _theme = new(){
             PaletteDark = _darkPalette,
             LayoutProperties = new LayoutProperties()
         };
 
-        SetPageTitleFromUrl();
+        await SetPageTitleFromUrlAsync();
 
         // Subscribe to location changes
         NavigationManager.LocationChanged += OnLocationChanged;
@@ -52,26 +53,33 @@
 
 
 
-     private void SetPageTitleFromUrl()
+     private async Task SetPageTitleFromUrlAsync()
     {
         var uri = NavigationManager.Uri;
         var urlSegments = new Uri(uri).AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries);
         
         // Suppose que ton paramètre est le deuxième segment de l'URL par exemple
-        if (urlSegments.Length > 1)
+        if (urlSegments.Length > 1 && urlSegments[0]=="album")
         {
-            PageTitle = urlSegments[1];  // Extrait le nom de l'album ou autre paramètre d'URL
+            if (int.TryParse(urlSegments[1], out var albumId))
+            {
+                // Appeler la méthode asynchrone pour obtenir le nom de l'album
+                var albumName = await DatabaseService.getAlbumNameByIdAsync(albumId);
+                PageTitle = albumName ?? "Album non trouvé";
+            }
         }
         else{
             PageTitle = "Bienvenue Tifred";
         }
     }
 
-    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    private async void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
     {
-        // Triggered every time the URL changes
-        SetPageTitleFromUrl();
-        StateHasChanged();  // Force the UI to refresh if necessary
+        await InvokeAsync(async () => 
+        {
+            await SetPageTitleFromUrlAsync();
+            StateHasChanged();  // Force the UI to refresh if necessary
+        });
     }
 
      // Unsubscribe from the event to prevent memory leaks

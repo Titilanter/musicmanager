@@ -1,4 +1,22 @@
-@for (int i = 0; i < 12; i++)
+@using MusicManager.Data
+@using MusicManager.Data.ORM
+@inject IDatabaseService DatabaseService
+
+@foreach (Song song in songs)
     {
-        <MusicComponent/>
+        <MusicComponent song=song/>
     }
+
+
+@code{
+    [Parameter]
+    public int idalbum {get; set;}
+
+    private IEnumerable<Song> songs {get; set;} = new List<Song>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        songs = await DatabaseService.GetSongsByAlbumIdAsync(idalbum);
+        StateHasChanged();
+    }
+}   

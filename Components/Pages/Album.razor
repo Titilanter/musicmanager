@@ -1,4 +1,7 @@
 @page "/album/{albumName}"
+@using MusicManager.Data
+@inject NavigationManager NavigationManager
+@inject IDatabaseService DatabaseService
 
 <PageTitle>@albumName</PageTitle>
 
@@ -25,10 +28,10 @@
 
 <MudPaper Class="d-flex flex-column gap-4" Height="70vh" Style="overflow-y:auto; background-color:inherit;">
 
-    <MusicManager.Components.CustomComponents.MusicList/>
+    <MusicManager.Components.CustomComponents.MusicList idalbum=idalbum/>
 
 
-    <MudPaper Width="95%" Height="150px" Class="d-flex ml-4 pl-4" Outlined="true">
+    <MudPaper Width="95%" Height="70px" Class="d-flex ml-4 pl-4" Outlined="true">
         <MudSpacer/>
         <MudIconButton Icon="@Icons.Material.Rounded.AddCircle" @onclick="AddNewSong"/>
         <MudSpacer/>
@@ -43,8 +46,11 @@
 @code{
     [Parameter]
     public string albumName {get; set;} = "Ipseite";
+    public int idalbum {get; set;} = 1;
 
     private bool AlbumFinished {get; set;}
+
+    private MusicManager.Data.ORM.Album album {get; set;} = new MusicManager.Data.ORM.Album();
 
     private void AddNewSong(){
         Console.WriteLine("AddNewSong");
@@ -52,5 +58,18 @@
 
     private void GoToCommercial(){
         Console.WriteLine("GoToCommercial");
+    }
+
+    protected override async Task OnInitializedAsync(){
+        var uri = NavigationManager.Uri;
+        var urlSegments = new Uri(uri).AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries);
+
+        int.TryParse(urlSegments[1], out var albumId);
+        idalbum = albumId;
+
+        album = await DatabaseService.GetAlbumByIdAsync(idalbum);
+
+
+        StateHasChanged();
     }
 }

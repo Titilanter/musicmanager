@@ -33,11 +33,6 @@
 
     private IEnumerable<MusicManager.Data.ORM.Album> albums = new List<MusicManager.Data.ORM.Album>();
 
-    @* protected override async Task OnInitializedAsync()
-    {
-        albums = await AlbumService.GetAlbumsAsync();
-    } *@
-
     private async Task CreateAlbum(){
         Console.WriteLine("CreateAlbum");
         albums = await DatabaseService.GetAllAlbumsAsync();

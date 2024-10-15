@@ -8,5 +8,11 @@ public interface IDatabaseService
     /// </summary>
     /// <returns></returns>
     Task<IEnumerable<Album>> GetAllAlbumsAsync();
+
+    Task<string> getAlbumNameByIdAsync(int albumId);
+
+    Task<IEnumerable<Song>> GetSongsByAlbumIdAsync(int albumId);
+
+    Task<Album> GetAlbumByIdAsync(int albumId);
     
 }

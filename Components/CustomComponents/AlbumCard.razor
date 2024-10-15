@@ -1,5 +1,5 @@
 @using MusicManager.Data.ORM
-<MudLink Href="/album/Ipseite"  Class="text-decoration-none">
+<MudLink Href="@albumLink"  Class="text-decoration-none">
     <MudCard Outlined="true" Style="width:250px; border-radius: 16px;">
         
         <MudCardMedia Image="@coverUri" Height="180" />
@@ -27,6 +27,7 @@
     private string iconFini {get; set;} = Icons.Material.Filled.Construction;
     private MudBlazor.Color iconColor {get; set;} = Color.Warning;
     private string textIcon {get; set;} = "L'album est en cours de modification";
+    private string albumLink {get; set;} = "/album/";
 
     protected override void OnInitialized(){
         if(album.coverUri=="" || album.coverUri==null){
@@ -45,6 +46,8 @@
             textIcon="L'album est fini.";
             iconColor=Color.Success;
         }
+
+        albumLink+=album.idAlbum.ToString();
 
         StateHasChanged();
     }
