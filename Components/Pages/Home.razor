@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using MusicManager.Data
+@using MusicManager.Components.CustomComponents
 @inject IDatabaseService DatabaseService
+@inject IDialogService DialogService
 
 
 <PageTitle>MusicManager</PageTitle>
@@ -45,6 +47,20 @@
         foreach(MusicManager.Data.ORM.Album album in albums){
             Console.WriteLine(album);
         }
+
+        var parameters = new DialogParameters();
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<AddAlbumModal>("Ajouter un album", parameters, options);
+        
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            // Actualiser les albums ou ajouter une logique supplémentaire après ajout
+            Console.WriteLine("Album ajouté avec succès.");
+            albums = await DatabaseService.GetAllAlbumsAsync();
+        }
+
     }
 
     private void CreateClip(){

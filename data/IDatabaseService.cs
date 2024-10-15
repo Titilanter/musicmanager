@@ -8,5 +8,6 @@ public interface IDatabaseService
     /// </summary>
     /// <returns></returns>
     Task<IEnumerable<Album>> GetAllAlbumsAsync();
-    
+    Task AddAlbumAsync(Album album); // Ajouter la définition de la méthode
+
 }

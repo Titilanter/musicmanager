@@ -46,4 +46,29 @@ public class DatabaseService : IDatabaseService
 
         return albums;
     }
+
+    public async Task AddAlbumAsync(Album album)
+    {
+        // Créer la connexion à la base de données
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+
+        // Définir la commande SQL pour insérer un nouvel album
+        var sql = @"
+        INSERT INTO album (nom, artiste, releasedate, deadline, fini, coveruri)
+        VALUES (@Nom, @Artiste, @ReleaseDate, @Deadline, @Fini, @CoverUri);
+        ";
+
+        // Créer la commande avec les paramètres
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddWithValue("Nom", album.nom);
+        command.Parameters.AddWithValue("Artiste", (object?)album.artiste ?? DBNull.Value);
+        command.Parameters.AddWithValue("ReleaseDate", (object?)album.releaseDate ?? DBNull.Value);
+        command.Parameters.AddWithValue("Deadline", (object?)album.deadline ?? DBNull.Value);
+        command.Parameters.AddWithValue("Fini", (object?)album.fini ?? DBNull.Value);
+        command.Parameters.AddWithValue("CoverUri", (object?)album.coverUri ?? DBNull.Value);
+
+        // Exécuter la commande
+        await command.ExecuteNonQueryAsync();
+    }
 }
