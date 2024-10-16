@@ -23,7 +23,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(50);
+        await Task.Delay(75);
         songs = await DatabaseService.GetSongsByAlbumIdAsync(album.idAlbum);
         
     }
