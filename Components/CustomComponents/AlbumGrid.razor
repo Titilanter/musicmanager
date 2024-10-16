@@ -1,21 +1,40 @@
+@using MusicManager.Data.ORM;
+@using MusicManager.Data
+@inject IDatabaseService DatabaseService
+
 <MudGrid Spacing="10" Justify="Justify.Center" Style="overflow-y:auto;">
-    @for (int i = 0; i < 9; i++)
-    {
-        <MudItem>
-            @if(typeGrid=="albums"){
-                <AlbumCard/>
-            }
-            else{
+        @if(typeGrid=="albums"){
+        foreach(Album album in albums){
+            <MudItem>
+                <AlbumCard album=album/>
+            </MudItem>
+        }
+        }
+    else{
+        for (int i = 0; i < 9; i++)
+        {
+            <MudItem>
                 <ClipCard/>
-            }
-        </MudItem>
+            </MudItem>
+        }
+        
     }
 </MudGrid>
 
 
 @code{
 
+    private IEnumerable<Album> albums {get; set;} = new List<Album>();
     
     [Parameter]
     public string typeGrid {get; set;} = string.Empty;
-}
+
+    
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        albums = await DatabaseService.GetAllAlbumsAsync();
+        StateHasChanged();
+    }
+}   

@@ -6,7 +6,7 @@ public class Album{
     public string artiste {get; set;}
     public DateTime? releaseDate {get; set;}
     public DateTime? deadline {get; set;}
-    public bool? fini {get; set;}
+    public bool fini {get; set;}
     public string? coverUri {get; set;}
 
     public override string ToString()
