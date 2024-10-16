@@ -2,21 +2,29 @@
 @using MusicManager.Data.ORM
 @inject IDatabaseService DatabaseService
 
-@foreach (Song song in songs)
+@if (songs != null && songs.Any())
+{
+    @foreach (Song song in songs)
     {
-        <MusicComponent song=song/>
+        <MusicComponent song="song" album="album"/>
     }
-
+}
+else
+{
+    <MudText Class="align-self-center m-4">No songs available for this album.</MudText>
+}
 
 @code{
     [Parameter]
-    public int idalbum {get; set;}
+    public Album album {get; set;}
 
     private IEnumerable<Song> songs {get; set;} = new List<Song>();
+        
 
     protected override async Task OnInitializedAsync()
     {
-        songs = await DatabaseService.GetSongsByAlbumIdAsync(idalbum);
-        StateHasChanged();
+        await Task.Delay(50);
+        songs = await DatabaseService.GetSongsByAlbumIdAsync(album.idAlbum);
+        
     }
-}   
+}

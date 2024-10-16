@@ -55,7 +55,6 @@ public class DatabaseService : IDatabaseService
 
         // Définir la commande SQL pour récupérer toutes les colonnes de la table Consultant
         var sql = "SELECT a.nom FROM album AS a WHERE a.idalbum = " + albumId.ToString();
-        Console.WriteLine(sql);
         await using var command = new NpgsqlCommand(sql, connection);
         await using var reader = await command.ExecuteReaderAsync();
 
@@ -68,7 +67,7 @@ public class DatabaseService : IDatabaseService
         return nomAlbum;
     }
 
-    public async Task<IEnumerable<Song>> GetSongsByAlbumIdAsync(int albumId){
+    public async Task<IEnumerable<Song>> GetSongsByAlbumIdAsync(long albumId){
         var songs = new List<Song>();
 
         // Créer une connexion à la base de données
@@ -77,7 +76,6 @@ public class DatabaseService : IDatabaseService
 
         // Définir la commande SQL pour récupérer toutes les colonnes de la table Consultant
         var sql = "SELECT * FROM song as s WHERE s.idalbum =" + albumId;
-
         await using var command = new NpgsqlCommand(sql, connection);
         await using var reader = await command.ExecuteReaderAsync();
 
@@ -96,13 +94,13 @@ public class DatabaseService : IDatabaseService
                 BeatUri = !reader.IsDBNull(7) ? reader.GetString(7) : null,
                 MockupUri = !reader.IsDBNull(8) ? reader.GetString(8) : null,
                 Notes = !reader.IsDBNull(9) ? reader.GetString(9) : null,
-                Paroles = !reader.IsDBNull(10) ? reader.GetString(10) : null
+                Paroles = !reader.IsDBNull(10) ? reader.GetString(10) : null,
+                order = reader.GetInt64(11)
             };
 
             // Ajouter l'objet consultant à la liste
             songs.Add(song);
         }
-
         return songs;
     }
 
@@ -115,7 +113,6 @@ public class DatabaseService : IDatabaseService
 
         // Définir la commande SQL pour récupérer toutes les colonnes de la table Consultant
         var sql = "SELECT * FROM album AS a WHERE a.idalbum = " + albumId.ToString();
-        Console.WriteLine(sql);
         await using var command = new NpgsqlCommand(sql, connection);
         await using var reader = await command.ExecuteReaderAsync();
 

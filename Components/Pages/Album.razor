@@ -1,24 +1,23 @@
-@page "/album/{albumName}"
+@page "/album/{albumId:int}"
 @using MusicManager.Data
-@inject NavigationManager NavigationManager
 @inject IDatabaseService DatabaseService
 
-<PageTitle>@albumName</PageTitle>
+<PageTitle>@albumSelectionne.nom</PageTitle>
 
 @* Ajouter targetRelease Date et Editing Deadline *@
 <MudPaper Width="95%" Style="background-color:inherit;" Class="d-flex justify-between align-center">
     <div Class="d-flex gap-4">
-        <MudDatePicker Label="Deadline" Editable="true" Placeholder="Select Deadline" Style="width:300px;" Class="align-self-center mb-4 ml-4" Variant="Variant.Outlined"/>
-        <MudDatePicker Label="Release Date" Editable="true" Placeholder="Select Release Date" Style="width:300px;" Class="align-self-center mb-4" Variant="Variant.Outlined"/>
+        <MudDatePicker Label="Deadline" Editable="true" Placeholder="Select Deadline" Style="width:300px;" Class="align-self-center mb-4 ml-4" Variant="Variant.Outlined" @bind-Date="albumSelectionne.deadline"/>
+        <MudDatePicker Label="Release Date" Editable="true" Placeholder="Select Release Date" Style="width:300px;" Class="align-self-center mb-4" Variant="Variant.Outlined" @bind-Date="albumSelectionne.releaseDate"/>
         <MudPaper Class="d-flex align-center p-3 gap-3" Style="background-color:inherit;" Elevation="0">
-            <MudToggleIconButton @bind-Toggled="AlbumFinished"
+            <MudToggleIconButton @bind-Toggled="albumSelectionne.fini"
                             Icon="@Icons.Material.Rounded.Construction"
                             Color="@Color.Warning"
                             ToggledIcon="@Icons.Material.Rounded.Check"
                             ToggledColor="@Color.Success"
-                            title="@(AlbumFinished ? "Yes" : "No")" />
+                            title="@(albumSelectionne.fini ? "Yes" : "No")" />
 
-            <span>L'album est @(AlbumFinished ? "fini" : "en cours de modifications")</span>
+            <span>L'album est @(albumSelectionne.fini ? "fini" : "en cours de modifications")</span>
         </MudPaper>
     </div>
     <MudSpacer/>
@@ -28,7 +27,7 @@
 
 <MudPaper Class="d-flex flex-column gap-4" Height="70vh" Style="overflow-y:auto; background-color:inherit;">
 
-    <MusicManager.Components.CustomComponents.MusicList idalbum=idalbum/>
+    <MusicManager.Components.CustomComponents.MusicList album="albumSelectionne"/>
 
 
     <MudPaper Width="95%" Height="70px" Class="d-flex ml-4 pl-4" Outlined="true">
@@ -45,12 +44,11 @@
 
 @code{
     [Parameter]
-    public string albumName {get; set;} = "Ipseite";
-    public int idalbum {get; set;} = 1;
+    public int albumId {get; set;} = 1;
 
     private bool AlbumFinished {get; set;}
 
-    private MusicManager.Data.ORM.Album album {get; set;} = new MusicManager.Data.ORM.Album();
+    private MusicManager.Data.ORM.Album albumSelectionne {get; set;} = new MusicManager.Data.ORM.Album();
 
     private void AddNewSong(){
         Console.WriteLine("AddNewSong");
@@ -61,15 +59,13 @@
     }
 
     protected override async Task OnInitializedAsync(){
-        var uri = NavigationManager.Uri;
-        var urlSegments = new Uri(uri).AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries);
-
-        int.TryParse(urlSegments[1], out var albumId);
-        idalbum = albumId;
-
-        album = await DatabaseService.GetAlbumByIdAsync(idalbum);
-
-
-        StateHasChanged();
+        if (albumId > 0) {
+            albumSelectionne = await DatabaseService.GetAlbumByIdAsync(albumId);
+            if (albumSelectionne == null) {
+                Console.WriteLine($"Album avec l'ID {albumId} introuvable.");
+            }
+        } else {
+            Console.WriteLine("ID de l'album invalide.");
+        }
     }
 }

@@ -12,4 +12,10 @@ public class Song{
     public string? MockupUri {get; set;}
     public string? Notes {get; set;}
     public string? Paroles {get; set;}
+    public long order {get; set;}
+
+    public override string ToString()
+    {
+        return nom + " dans l'album numéro : " + idAlbum;
+    }
 }

@@ -11,7 +11,7 @@ public interface IDatabaseService
 
     Task<string> getAlbumNameByIdAsync(int albumId);
 
-    Task<IEnumerable<Song>> GetSongsByAlbumIdAsync(int albumId);
+    Task<IEnumerable<Song>> GetSongsByAlbumIdAsync(long albumId);
 
     Task<Album> GetAlbumByIdAsync(int albumId);
     
