@@ -69,6 +69,15 @@
                 PageTitle = albumName ?? "Album non trouvé";
             }
         }
+        else if(urlSegments.Length > 1 && urlSegments[0]=="song")
+        {
+            if (int.TryParse(urlSegments[1], out var songId))
+            {
+                // Appeler la méthode asynchrone pour obtenir le nom de l'album
+                var songName = await DatabaseService.getSongNameByIdAsync(songId);
+                PageTitle = songName ?? "Chanson non trouvée";
+            }
+        }
         else{
             PageTitle = "Bienvenue Tifred";
         }

@@ -67,6 +67,27 @@ public class DatabaseService : IDatabaseService
         return nomAlbum;
     }
 
+    public async Task<string> getSongNameByIdAsync(int songId){
+        var nomSong = string.Empty;
+
+        // Créer une connexion à la base de données
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+
+        // Définir la commande SQL pour récupérer toutes les colonnes de la table Consultant
+        var sql = "SELECT s.nom FROM song AS s WHERE s.idsong = " + songId.ToString();
+        await using var command = new NpgsqlCommand(sql, connection);
+        await using var reader = await command.ExecuteReaderAsync();
+
+        if (await reader.ReadAsync())
+        {
+            // Récupérer le nom de l'album depuis le résultat de la requête
+            nomSong = reader.GetString(0); // La première colonne contient le nom de l'album
+        }
+
+        return nomSong;
+    }
+
     public async Task<IEnumerable<Song>> GetSongsByAlbumIdAsync(long albumId){
         var songs = new List<Song>();
 
@@ -75,7 +96,7 @@ public class DatabaseService : IDatabaseService
         await connection.OpenAsync();
 
         // Définir la commande SQL pour récupérer toutes les colonnes de la table Consultant
-        var sql = "SELECT * FROM song as s WHERE s.idalbum =" + albumId;
+        var sql = "SELECT * FROM song as s WHERE s.idalbum =" + albumId + " ORDER BY s.order ASC;";
         await using var command = new NpgsqlCommand(sql, connection);
         await using var reader = await command.ExecuteReaderAsync();
 
@@ -132,6 +153,42 @@ public class DatabaseService : IDatabaseService
         }
 
         return album;
+    }
+
+
+    public async Task<Song> GetSongByIdAsync(int songId){
+        Song song = new Song();
+
+        // Créer une connexion à la base de données
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+
+        // Définir la commande SQL pour récupérer toutes les colonnes de la table Consultant
+        var sql = "SELECT * FROM song AS s WHERE s.idsong = " + songId.ToString();
+        await using var command = new NpgsqlCommand(sql, connection);
+        await using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            // Créer un objet Album pour chaque ligne de résultats
+            song = new Song
+            {
+                idSong = reader.GetInt64(0),
+                idAlbum = reader.GetInt64(1),
+                nom = reader.GetString(2),
+                releaseDate = !reader.IsDBNull(3) ? reader.GetDateTime(3) : null,
+                deadline = !reader.IsDBNull(4) ? reader.GetDateTime(4) : null,
+                fini = reader.GetBoolean(5),
+                featurings = !reader.IsDBNull(6) ? reader.GetString(6) : null,
+                BeatUri = !reader.IsDBNull(7) ? reader.GetString(7) : null,
+                MockupUri = !reader.IsDBNull(8) ? reader.GetString(8) : null,
+                Notes = !reader.IsDBNull(9) ? reader.GetString(9) : null,
+                Paroles = !reader.IsDBNull(10) ? reader.GetString(10) : null,
+                order = reader.GetInt64(11)
+            };
+        }
+
+        return song;
     }
 
     public async Task AddAlbumAsync(Album album)

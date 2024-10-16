@@ -13,8 +13,11 @@ public interface IDatabaseService
 
     Task<string> getAlbumNameByIdAsync(int albumId);
 
+    Task<string> getSongNameByIdAsync(int songId);
+
     Task<IEnumerable<Song>> GetSongsByAlbumIdAsync(long albumId);
 
     Task<Album> GetAlbumByIdAsync(int albumId);
+    Task<Song> GetSongByIdAsync(int songId);
     
 }

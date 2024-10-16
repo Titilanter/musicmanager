@@ -1,6 +1,8 @@
-@page "/song/{songName}"
+@page "/song/{songId:int}"
+@using MusicManager.Data
+@inject IDatabaseService DatabaseService
 
-<PageTitle>@songName</PageTitle>
+<PageTitle>@songSelectionne.nom</PageTitle>
 
 <MudPaper Width="100%" Style="background-color:inherit;" Class="pl-4 pr-4" Elevation="0">
     <MudPaper Class="d-flex align-center" Style="background-color:inherit;" Elevation="0">
@@ -8,16 +10,16 @@
             <MudIcon Icon="@Icons.Material.Rounded.AddCircle"/>
             <MudText>Ajouter un featuring</MudText>
         </MudPaper>
-        <MudText Class="m-4">Feat. Tifred, Ninho</MudText>
+        <MudText Class="m-4">@featurings</MudText>
         <MudPaper Class="d-flex align-center p-3 gap-3" Style="background-color:inherit;" Elevation="0">
-            <MudToggleIconButton @bind-Toggled="SongFinished"
+            <MudToggleIconButton @bind-Toggled="songSelectionne.fini"
                             Icon="@Icons.Material.Rounded.Construction"
                             Color="@Color.Warning"
                             ToggledIcon="@Icons.Material.Rounded.Check"
                             ToggledColor="@Color.Success"
-                            title="@(SongFinished ? "Yes" : "No")" />
+                            title="@(songSelectionne.fini ? "Yes" : "No")" />
 
-            <span>Le son est @(SongFinished ? "fini" : "en cours de modifications")</span>
+            <span>Le son est @(songSelectionne.fini ? "fini" : "en cours de modifications")</span>
         </MudPaper>
         <MudSpacer/>
         <MudButton Variant="Variant.Filled" Class="p-3" Style="width:200px;" Color="@Color.Dark" @onclick="GoToClip">Clip</MudButton>
@@ -39,23 +41,22 @@
         </MudPaper>
 
         <MudPaper Class="pl-2" Style="background-color:inherit; height:72vh; overflow:auto;" Outlined="true">
-            <MudTextField T="string" Label="Notes" Text="@notesContent" Lines="34" AutoGrow/>
+            <MudTextField T="string" Label="Notes" Text="@songSelectionne.Notes" Lines="34" AutoGrow/>
         </MudPaper>
 
     </MudPaper>
 
     <MudPaper Width="33vw" Class=" m-2 pl-2" Style="background-color:inherit; height:79vh; overflow:auto;" Outlined="true" >
-        <MudTextField T="string" Label="Paroles" Text="@Paroles" Lines="37" AutoGrow/>
+        <MudTextField T="string" Label="Paroles" Text="@songSelectionne.Paroles" Lines="37" AutoGrow/>
     </MudPaper>
 </MudPaper>
 
 
 @code{
     [Parameter]
-    public string songName {get; set;} = "Ipseite";
-    private bool SongFinished {get; set;}
-    private string notesContent {get; set;}
-    private string Paroles {get; set;}
+    public int songId {get; set;} = 1;
+    private MusicManager.Data.ORM.Song songSelectionne {get; set;} = new MusicManager.Data.ORM.Song();
+    private string featurings {get; set;}
 
     private void AddFeaturing(){
         Console.WriteLine("Feat");
@@ -63,5 +64,22 @@
 
     private void GoToClip(){
         Console.WriteLine("Clip");
+    }
+
+    protected override async Task OnInitializedAsync(){
+        if (songId > 0) {
+            songSelectionne = await DatabaseService.GetSongByIdAsync(songId);
+            if (songSelectionne == null) {
+                Console.WriteLine($"Album avec l'ID {songId} introuvable.");
+            }
+            else{
+                if(songSelectionne.featurings!= null){
+                    featurings="Feat. " + songSelectionne.featurings;
+                }
+            }
+        } 
+        else {
+            Console.WriteLine("ID de l'album invalide.");
+        }
     }
 }
