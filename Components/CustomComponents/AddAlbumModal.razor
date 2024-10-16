@@ -10,12 +10,12 @@
         <MudForm @ref="form">
             <MudTextField @bind-Value="newAlbum.nom" Label="Nom de l'album" Required="true" />
             <MudTextField @bind-Value="newAlbum.artiste" Label="Artiste" Required="true" />
-            <MudDatePicker @bind-Value="newAlbum.releaseDate" Label="Date de sortie" />
-            <MudDatePicker @bind-Value="newAlbum.deadline" Label="Deadline" />
+            <MudDatePicker @bind-Date="newAlbum.releaseDate" Label="Date de sortie" />
+            <MudDatePicker @bind-Date="newAlbum.deadline" Label="Deadline" />
         </MudForm>
     </DialogContent>
     <DialogActions>
-        <MudButton Color="Color.Primary" OnClick="@CloseModal" >Ajouter</MudButton>
+        <MudButton Color="Color.Primary" OnClick="CreateAlbum" >Ajouter</MudButton>
         <MudButton Color="Color.Secondary" OnClick="@CloseModal">Annuler</MudButton>
     </DialogActions>
 </MudDialog>
@@ -26,15 +26,28 @@
 
     private Album newAlbum = new Album();
     private MudForm form;
+    
+    private async Task CreateAlbum()
+    {
+       
+        if (form.IsValid)
+        {
+            await DatabaseService.AddAlbumAsync(newAlbum);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        else
+        {
+            Console.WriteLine("Le formulaire n'est pas valide.");
+        }
+    }
 
-   
     private void CloseModal()
     {
         // Afficher les détails de l'album dans la console
         Console.WriteLine($"Nouvel album : {newAlbum.nom}");
         Console.WriteLine($"Artiste : {newAlbum.artiste}");
-        Console.WriteLine($"Date de sortie : {newAlbum.releaseDate?.ToString("dd/MM/yyyy") ?? "Non spécifiée"}");
-        Console.WriteLine($"Deadline : {newAlbum.deadline?.ToString("dd/MM/yyyy") ?? "Non spécifiée"}");
+        Console.WriteLine($"Date de sortie : {newAlbum.releaseDate}");
+        Console.WriteLine($"Deadline : {newAlbum.deadline}");
         MudDialog.Cancel();
     }
 }

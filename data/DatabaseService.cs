@@ -65,7 +65,7 @@ public class DatabaseService : IDatabaseService
         command.Parameters.AddWithValue("Artiste", (object?)album.artiste ?? DBNull.Value);
         command.Parameters.AddWithValue("ReleaseDate", (object?)album.releaseDate ?? DBNull.Value);
         command.Parameters.AddWithValue("Deadline", (object?)album.deadline ?? DBNull.Value);
-        command.Parameters.AddWithValue("Fini", (object?)album.fini ?? DBNull.Value);
+        command.Parameters.AddWithValue("Fini", false);
         command.Parameters.AddWithValue("CoverUri", (object?)album.coverUri ?? DBNull.Value);
 
         // Exécuter la commande
