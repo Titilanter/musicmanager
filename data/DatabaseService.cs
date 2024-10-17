@@ -155,7 +155,6 @@ public class DatabaseService : IDatabaseService
         return album;
     }
 
-
     public async Task<Song> GetSongByIdAsync(int songId){
         Song song = new Song();
 
@@ -214,5 +213,43 @@ public class DatabaseService : IDatabaseService
 
         // Exécuter la commande
         await command.ExecuteNonQueryAsync();
+    }
+
+    public async Task<bool> CheckClipWithSongId(int songId){
+        bool hasClipRelated = false;
+
+        // Créer une connexion à la base de données
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+
+        // Définir la commande SQL pour récupérer toutes les colonnes de la table Consultant
+        var sql = "SELECT * FROM clip AS c WHERE c.idsong = " + songId.ToString();
+        await using var command = new NpgsqlCommand(sql, connection);
+        await using var reader = await command.ExecuteReaderAsync();
+
+        if(reader.HasRows){
+            hasClipRelated = true;
+        }
+
+        return hasClipRelated;
+    }
+
+    public async Task<bool> CheckPlanComByAlbumId(int albumId){
+        bool hasPlanComRelated = false;
+
+        // Créer une connexion à la base de données
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+
+        // Définir la commande SQL pour récupérer toutes les colonnes de la table Consultant
+        var sql = "SELECT * FROM plancommunication AS pc WHERE pc.idalbum = " + albumId.ToString();
+        await using var command = new NpgsqlCommand(sql, connection);
+        await using var reader = await command.ExecuteReaderAsync();
+
+        if(reader.HasRows){
+            hasPlanComRelated = true;
+        }
+
+        return hasPlanComRelated;
     }
 }
