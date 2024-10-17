@@ -3,6 +3,7 @@
 @using MusicManager.Data
 @inject IDatabaseService DatabaseService
 @inject IDialogService DialogService
+@inject NavigationManager Navigation
 
 <MudDialog>
     <DialogContent>
@@ -34,6 +35,9 @@
         {
             await DatabaseService.AddAlbumAsync(newAlbum);
             MudDialog.Close(DialogResult.Ok(true));
+            
+            // Rafraîchir la page actuelle
+            Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
         }
         else
         {
