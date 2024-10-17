@@ -38,7 +38,17 @@
 
 </MudPaper>
 <MudPaper Height="10vh" Style="background-color:inherit;" Class="d-flex justify-center" Elevation="0">
-    <MudButton Style="width:250px; height:60px;" Variant="Variant.Filled" Class="align-self-center" Color="Color.Success" @onclick="GoToCommercial">Plan commercial</MudButton>
+    @if(hasPlanComRelated){
+        <MudButton Style="width:250px; height:60px;" Variant="Variant.Filled" Class="align-self-center" Color="Color.Success" @onclick="GoToCommercial">Plan commercial</MudButton>
+    }
+    else{
+        <MudPaper Class="d-flex align-center align-self-center mr-4" Style="background-color:inherit;" Elevation="0" @onclick:stopPropagation="true">
+            <MudPaper Class="d-flex align-center p-3 gap-3 align-self-center" Style="background-color:inherit;" Outlined="true" Elevation="0" @onclick="AddPlanCom">
+                <MudText Class="align-self-center">Ajouter un plan de communication</MudText>
+                <MudIcon Icon="@Icons.Material.Rounded.AddCircle" Class="align-self-center"/>
+            </MudPaper>
+        </MudPaper>
+    }
 </MudPaper>
 
 
@@ -47,6 +57,7 @@
     public int albumId {get; set;} = 1;
 
     private bool AlbumFinished {get; set;}
+    private bool hasPlanComRelated {get; set;}
 
     private MusicManager.Data.ORM.Album albumSelectionne {get; set;} = new MusicManager.Data.ORM.Album();
 
@@ -58,9 +69,14 @@
         Console.WriteLine("GoToCommercial");
     }
 
+    private void AddPlanCom(){
+        Console.WriteLine("AddPlanCom");
+    }
+
     protected override async Task OnInitializedAsync(){
         if (albumId > 0) {
             albumSelectionne = await DatabaseService.GetAlbumByIdAsync(albumId);
+            hasPlanComRelated = await DatabaseService.CheckPlanComByAlbumId(albumId);
             if (albumSelectionne == null) {
                 Console.WriteLine($"Album avec l'ID {albumId} introuvable.");
             }

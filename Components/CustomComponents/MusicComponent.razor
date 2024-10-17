@@ -1,12 +1,14 @@
 @using MusicManager.Data.ORM
 @inject NavigationManager Navigation
+@using MusicManager.Data
+@inject IDatabaseService DatabaseService
 
 <MudPaper Width="95%" Height="70px" Class="d-flex ml-4 pl-4" Outlined="true" @onclick="GoToMusic">
     <MudText Class="align-self-center mr-4">@song.order.</MudText>
     <MudImage Src="@album.coverUri" Style="heigth:60px; width:60px;" Class="m-2"/>
     <MudText Class="align-self-center ml-4 mr-4" Style="Width:15%;">@song.nom</MudText>
     <AudioListener Width="50%"/>
-    <MudText Class="align-self-center mr-10">3:12</MudText>
+    <MudText Class="align-self-center mr-5">3:12</MudText>
     <MudText Class="align-self-center ml-4" Style="width:10vh;">@featurings</MudText>
     <MudToggleIconButton @bind-Toggled="song.fini"
                         Icon="@Icons.Material.Rounded.Construction"
@@ -14,7 +16,20 @@
                         ToggledIcon="@Icons.Material.Rounded.Check"
                         ToggledColor="@Color.Success"
                         title="@(song.fini ? "Yes" : "No")" />
-    <MudButton Style="width:150px; height:50px;" Variant="Variant.Filled" Class="align-self-center mr-4" @onclick="GoToClip">Clip</MudButton>
+
+    @if(hasClipRelated){
+        <MudButton Style="width:10%; height:70%;" Variant="Variant.Filled" Class="align-self-center mr-4" @onclick="GoToClip">Clip</MudButton>
+    }
+    else{
+        <MudPaper Class="d-flex align-center align-self-center mr-4" Height="70%" Style="background-color:inherit; width:10%;" Elevation="0" @onclick:stopPropagation="true">
+            <MudPaper Class="d-flex align-center p-3 gap-3 align-self-center" Height="100%" Style="background-color:inherit;" Outlined="true" Elevation="0" @onclick="AddClip">
+                <MudText Class="align-self-center">Ajouter un clip</MudText>
+                <MudIcon Icon="@Icons.Material.Rounded.AddCircle" Class="align-self-center"/>
+            </MudPaper>
+        </MudPaper>
+    }
+  
+
     <MudIconButton Icon="@Icons.Material.Rounded.Menu" Class="mr-4" @onclick="DragAndDrop"/>
 </MudPaper>
 
@@ -27,13 +42,14 @@
     public Album album {get; set;}
     private bool SongFinished {get; set;}
     private string featurings {get; set;} = string.Empty;
+    private bool hasClipRelated {get; set;} = false;
 
-    protected override void OnInitialized(){
-        base.OnInitialized();
+    protected override async Task OnInitializedAsync(){
         if(song.featurings!= null){
             featurings="Feat. " + song.featurings;
         }
         
+        hasClipRelated = await DatabaseService.CheckClipWithSongId((int) song.idSong);
     }
 
     private void GoToMusic(){
@@ -46,5 +62,9 @@
 
     private void DragAndDrop(){
         Console.WriteLine("DragAndDrop");
+    }
+
+    private void AddClip(){
+        Console.WriteLine("new Clip");
     }
 }
