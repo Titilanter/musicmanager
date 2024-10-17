@@ -23,7 +23,6 @@ obj/
 TestResults/
 node_modules/
 dist/
-wwwroot/
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
