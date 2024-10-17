@@ -19,5 +19,9 @@ public interface IDatabaseService
 
     Task<Album> GetAlbumByIdAsync(int albumId);
     Task<Song> GetSongByIdAsync(int songId);
+
+    Task<bool> CheckClipWithSongId(int songId);
+
+    Task<bool> CheckPlanComByAlbumId(int albumId);
     
 }

@@ -22,7 +22,17 @@
             <span>Le son est @(songSelectionne.fini ? "fini" : "en cours de modifications")</span>
         </MudPaper>
         <MudSpacer/>
-        <MudButton Variant="Variant.Filled" Class="p-3" Style="width:200px;" Color="@Color.Dark" @onclick="GoToClip">Clip</MudButton>
+        @if(hasClipRelated){
+            <MudButton Variant="Variant.Filled" Class="p-3" Style="width:200px;" Color="@Color.Dark" @onclick="GoToClip">Clip</MudButton>
+        }
+        else{
+            <MudPaper Class="d-flex align-center align-self-center mr-4" Height="70%" Style="background-color:inherit; width:10%;" Elevation="0" @onclick:stopPropagation="true">
+                <MudPaper Class="d-flex align-center p-3 gap-3 align-self-center" Height="100%" Style="background-color:inherit;" Outlined="true" Elevation="0" @onclick="AddClip">
+                    <MudText Class="align-self-center">Ajouter un clip</MudText>
+                    <MudIcon Icon="@Icons.Material.Rounded.AddCircle" Class="align-self-center"/>
+                </MudPaper>
+            </MudPaper>
+        }
     </MudPaper>
 </MudPaper>
 
@@ -57,6 +67,7 @@
     public int songId {get; set;} = 1;
     private MusicManager.Data.ORM.Song songSelectionne {get; set;} = new MusicManager.Data.ORM.Song();
     private string featurings {get; set;}
+    private bool hasClipRelated {get; set;}
 
     private void AddFeaturing(){
         Console.WriteLine("Feat");
@@ -64,6 +75,10 @@
 
     private void GoToClip(){
         Console.WriteLine("Clip");
+    }
+
+    private void AddClip(){
+        Console.WriteLine("AddClip");
     }
 
     protected override async Task OnInitializedAsync(){
@@ -76,6 +91,7 @@
                 if(songSelectionne.featurings!= null){
                     featurings="Feat. " + songSelectionne.featurings;
                 }
+                hasClipRelated = await DatabaseService.CheckClipWithSongId((int) songSelectionne.idSong);
             }
         } 
         else {
