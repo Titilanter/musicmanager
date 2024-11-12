@@ -252,4 +252,65 @@ public class DatabaseService : IDatabaseService
 
         return hasPlanComRelated;
     }
+
+    public async Task AddSongAsync(Song song)
+    {
+        // Créer la connexion à la base de données
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+
+        // Définir la commande SQL pour insérer un nouveau song sans BeatUri et MockupUri
+        var sql = @"
+        INSERT INTO song (idalbum, nom, releasedate, deadline, fini, featurings, Notes, Paroles, ""order"")
+        VALUES (@IdAlbum, @Nom, @ReleaseDate, @Deadline, @Fini, @Featurings, @Notes, @Paroles, @Order);
+        ";
+
+        // Créer la commande avec les paramètres
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddWithValue("IdAlbum", song.idAlbum);
+        command.Parameters.AddWithValue("Nom", song.nom);
+        command.Parameters.AddWithValue("ReleaseDate", (object?)song.releaseDate ?? DBNull.Value);
+        command.Parameters.AddWithValue("Deadline", (object?)song.deadline ?? DBNull.Value);
+        command.Parameters.AddWithValue("Fini", song.fini);
+        command.Parameters.AddWithValue("Featurings", (object?)song.featurings ?? DBNull.Value);
+        command.Parameters.AddWithValue("Notes", (object?)song.Notes ?? DBNull.Value);
+        command.Parameters.AddWithValue("Paroles", (object?)song.Paroles ?? DBNull.Value);
+        command.Parameters.AddWithValue("Order", song.order);
+
+        // Exécuter la commande
+        await command.ExecuteNonQueryAsync();
+    }
+
+    public async Task<List<Song>> GetAllSongsAsync()
+    {
+        var songs = new List<Song>();
+
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync();
+
+        var sql = "SELECT * FROM song;";
+        await using var command = new NpgsqlCommand(sql, connection);
+        await using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            var song = new Song
+            {
+                idSong = reader.GetInt64(0),
+                idAlbum = reader.GetInt64(1),
+                nom = reader.GetString(2),
+                releaseDate = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
+                deadline = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
+                fini = reader.GetBoolean(5),
+                featurings = reader.IsDBNull(6) ? null : reader.GetString(6),
+                Notes = reader.IsDBNull(7) ? null : reader.GetString(7),
+                Paroles = reader.IsDBNull(8) ? null : reader.GetString(8),
+                order = reader.GetInt64(9)
+            };
+            songs.Add(song);
+        }
+
+        return songs;
+    }
+
 }

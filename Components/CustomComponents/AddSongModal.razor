@@ -1,0 +1,62 @@
+@page "/addsong"
+@using MusicManager.Data.ORM
+@using MusicManager.Data
+@inject IDatabaseService DatabaseService
+@inject IDialogService DialogService
+@inject NavigationManager Navigation
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6" GutterBottom>Ajouter un nouveau song</MudText>
+        <MudForm @ref="form">
+            <MudTextField @bind-Value="newSong.nom" Label="Nom de la chanson" Required="true" />
+            <MudTextField @bind-Value="newSong.featurings" Label="Featurings" />
+            <MudNumericField @bind-Value="newSong.order" Label="Order" />
+            <MudDatePicker @bind-Date="newSong.releaseDate" Label="Date de sortie" />
+            <MudDatePicker @bind-Date="newSong.deadline" Label="Deadline" />
+            <MudCheckBox @bind-Checked="newSong.fini" Label="Fini" T="bool" />
+            <MudTextField @bind-Value="newSong.Notes" Label="Notes" />
+            <MudTextField @bind-Value="newSong.Paroles" Label="Paroles" />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="CreateSong" >Ajouter</MudButton>
+        <MudButton Color="Color.Secondary" OnClick="@CloseModal">Annuler</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] 
+    MudDialogInstance MudDialog { get; set; }
+
+    private Song newSong = new Song();
+    private MudForm form;
+    
+    private async Task CreateSong()
+    {
+        if (form.IsValid)
+        {
+            await DatabaseService.AddSongAsync(newSong);
+            MudDialog.Close(DialogResult.Ok(true));
+            
+            // Rafraîchir la page actuelle
+            Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+        }
+        else
+        {
+            Console.WriteLine("Le formulaire n'est pas valide.");
+        }
+    }
+
+    private void CloseModal()
+    {
+        // Afficher les détails du song dans la console
+        Console.WriteLine($"Nouvelle chanson : {newSong.nom}");
+        Console.WriteLine($"Featurings : {newSong.featurings}");
+        Console.WriteLine($"Order : {newSong.order}");
+        Console.WriteLine($"Date de sortie : {newSong.releaseDate}");
+        Console.WriteLine($"Deadline : {newSong.deadline}");
+        Console.WriteLine($"Fini : {newSong.fini}");
+        MudDialog.Cancel();
+    }
+}

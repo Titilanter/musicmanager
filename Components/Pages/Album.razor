@@ -1,6 +1,10 @@
 @page "/album/{albumId:int}"
 @using MusicManager.Data
+@using MusicManager.Components.CustomComponents
+@inject IDialogService DialogService
 @inject IDatabaseService DatabaseService
+@using SongData = MusicManager.Data.ORM
+
 
 <PageTitle>@albumSelectionne.nom</PageTitle>
 
@@ -59,11 +63,31 @@
     private bool AlbumFinished {get; set;}
     private bool hasPlanComRelated {get; set;}
 
+    private List<MusicManager.Data.ORM.Song> songs = new List<MusicManager.Data.ORM.Song>();
+
+
     private MusicManager.Data.ORM.Album albumSelectionne {get; set;} = new MusicManager.Data.ORM.Album();
 
-    private void AddNewSong(){
+    private async Task AddNewSong()
+    {
         Console.WriteLine("AddNewSong");
+    
+        var parameters = new DialogParameters();
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+    
+        // Ouvrir la modal AddSongModal au lieu de AddAlbumModal
+        var dialog = DialogService.Show<AddSongModal>("Ajouter une chanson", parameters, options);
+
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            // Logique supplémentaire après ajout, comme actualiser la liste des chansons
+            Console.WriteLine("Chanson ajoutée avec succès.");
+            songs = await DatabaseService.GetAllSongsAsync();
+        }
     }
+
 
     private void GoToCommercial(){
         Console.WriteLine("GoToCommercial");

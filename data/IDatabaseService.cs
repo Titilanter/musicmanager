@@ -23,5 +23,9 @@ public interface IDatabaseService
     Task<bool> CheckClipWithSongId(int songId);
 
     Task<bool> CheckPlanComByAlbumId(int albumId);
-    
+
+    Task AddSongAsync(Song song);
+
+    Task<List<Song>> GetAllSongsAsync();
+
 }
